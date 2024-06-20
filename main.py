@@ -48,6 +48,8 @@ class Speech:
             webbrowser.open("https://www.google.com/maps/dir//R2FV%2B6Q7+SRM+Institute+of+Science+and+Technology,+Potheri,+SRM+Nagar,+Kattankulathur,+Tamil+Nadu+603203/@12.823033,79.8919807,12z/data=!4m18!1m8!3m7!1s0x3a52f712b82a78d9:0xfdb944a3aee53831!2sSRM+Institute+of+Science+and+Technology!8m2!3d12.823033!4d80.044416!15sCgNzcm0iA4gBAZIBCnVuaXZlcnNpdHngAQA!16zL20vMGJwNzl6!4m8!1m0!1m5!1m1!1s0x3a52f712b82a78d9:0xfdb944a3aee53831!2m2!1d80.044416!2d12.823033!3e3?entry=ttu")
         elif "contact" in command:
             webbrowser.open("https://www.srmist.edu.in/contact-us/")
+        elif "attendance" in command:  # Added attendance command
+            webbrowser.open("https://academia.srmist.edu.in/#Page:My_Attendance")
         elif "wikipedia" in command:
             query = command.replace("wikipedia", "").strip()
             if query:
@@ -116,6 +118,11 @@ class SRMAlexaApp(App):
         contact_button = Button(text='Contact SRMIST', font_size=24, background_color=(0, 0, 1, 1), color=(1, 1, 1, 1))
         contact_button.bind(on_press=lambda x: self.open_url("https://www.srmist.edu.in/contact-us/"))
         button_layout.add_widget(contact_button)
+
+        # Adding Attendance Button
+        attendance_button = Button(text='Check Attendance', font_size=24, background_color=(0, 0, 1, 1), color=(1, 1, 1, 1))
+        attendance_button.bind(on_press=lambda x: self.open_url("https://academia.srmist.edu.in/#Page:My_Attendance"))
+        button_layout.add_widget(attendance_button)
 
         main_layout.add_widget(button_layout)
 
