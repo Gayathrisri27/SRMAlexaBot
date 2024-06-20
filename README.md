@@ -1,42 +1,64 @@
-# SRMAlexaBot
-### Project Overview: SRM-Alexa
+Certainly! Here's a more detailed overview of the SRM-Alexa project:
 
-**SRM-Alexa** is a Python-based virtual assistant designed to provide users with voice-activated access to various SRM Institute of Science and Technology resources. The assistant uses speech recognition and text-to-speech technologies to interact with users, opening web pages based on specific voice commands. It also features a graphical user interface (GUI) with animated elements to enhance user engagement.
+### SRM-Alexa Project Overview
 
-#### Key Components:
+**Project Description:**
+SRM-Alexa is a voice-controlled assistant application developed using Python and the Kivy framework. It integrates several functionalities to provide information and access to various services related to SRM Institute of Science and Technology (SRMIST).
 
-1. **Speech Recognition and Processing**:
-    - **Speech Recognition**: The assistant utilizes the `speech_recognition` library to capture and process voice commands. It listens for specific keywords to trigger actions, such as opening web pages.
-    - **Text-to-Speech**: The `pyttsx3` library is employed to provide audio feedback to the user, enhancing interactivity.
+### Key Features:
 
-2. **Graphical User Interface (GUI)**:
-    - **Tkinter**: The GUI is built using the `tkinter` library, offering a simple and intuitive interface for users to interact with SRM-Alexa.
-    - **Text Box**: A text box is included to display the interactions between the user and the assistant, with different text styles to distinguish user commands, assistant responses, and errors.
-    - **GIF Animation**: An animated GIF is displayed within the GUI using the `PIL` library's `ImageSequence` module, adding a dynamic visual element.
+1. **Voice Interaction:**
+   - Utilizes the `speech_recognition` library to enable voice commands.
+   - Commands trigger actions such as opening specific URLs related to SRMIST services.
 
-3. **Web Browser Integration**:
-    - The assistant opens various SRM-related web pages in response to voice commands, providing quick access to the student portal, official website, YouTube channel, hospital information, campus map, and contact details.
+2. **Web Integration:**
+   - Direct access to SRMIST services like the Student Portal, official website, YouTube channel, hospital information, campus map, and contact details using `webbrowser`.
 
-#### Detailed Description:
+3. **Wikipedia Search:**
+   - Allows users to search Wikipedia for information.
+   - Displays summaries of queried topics using the `wikipediaapi` library.
 
-1. **Speech Recognition and Text-to-Speech**:
-    - **Class `speech`**: Contains static methods for text-to-speech (`speak`) and processing commands (`process_command`). The `process_command` method matches the recognized voice command with predefined keywords to perform specific actions, such as opening URLs.
-    - **Function `listen_for_commands`**: Continuously listens for voice commands using a background thread. It handles exceptions for unknown or unrecognized speech and updates the GUI accordingly.
+4. **GUI with Kivy:**
+   - Implements a graphical user interface (GUI) using Kivy.
+   - Features include buttons for different functionalities, a text input for Wikipedia searches, and a pop-up window to display Wikipedia search results.
 
-2. **GUI Setup and Management**:
-    - **Function `main`**: Initializes the main application window, sets up the text box with specific styling, and loads the animated GIF. It also starts the speech recognition thread and welcomes the user with a spoken message.
-    - **Function `update_gif`**: Handles the animation of the GIF by updating the displayed frame at a regular interval.
+5. **Multithreading:**
+   - Utilizes Python's `threading` module to handle continuous listening for voice commands without blocking the main application thread.
 
-#### Features:
+6. **Text-to-Speech:**
+   - Uses `pyttsx3` for text-to-speech functionality to provide auditory feedback for commands and search results.
 
-- **Voice Commands**: Users can issue voice commands like "portal," "website," "youtube," "hospital," "map," and "contact" to quickly access corresponding web resources.
-- **Text Feedback**: The assistant provides text feedback in the GUI for both user commands and its responses.
-- **Error Handling**: The system informs users about any recognition errors or network issues through both text and speech.
-- **Animated GUI**: An animated GIF enhances the visual appeal of the assistant, making it more engaging.
+### Project Components:
 
-#### Usage:
+- **API Class (`API`):**
+  - Static methods to interface with Wikipedia using `wikipediaapi` for fetching summaries based on user queries.
 
-- **Starting the Assistant**: Run the script to launch the GUI. SRM-Alexa will greet the user and start listening for voice commands.
-- **Interacting with SRM-Alexa**: Speak the predefined commands to navigate to various SRM-related online resources. The assistant will confirm actions and handle errors gracefully.
+- **Speech Class (`Speech`):**
+  - Static methods for text-to-speech functionality (`speak` method).
+  - Processes voice commands (`process_command` method) to trigger actions like opening URLs and searching Wikipedia.
 
-This project demonstrates the integration of multiple technologies to create a responsive and interactive virtual assistant, providing a useful tool for students and staff at the SRM Institute of Science and Technology.
+- **SRMAlexaApp Class (`SRMAlexaApp`):**
+  - Inherits from `App` in Kivy to manage the application lifecycle and GUI.
+  - Builds the GUI layout using Kivy widgets (`BoxLayout`, `GridLayout`, `Button`, `Label`, `TextInput`, `Image`, `Popup`).
+  - Methods include handling button events (`open_url`, `search_wikipedia`), displaying information in pop-up windows (`display_text`), and starting voice interaction (`talk_with_me`).
+
+- **Voice Command Listener (`listen_for_commands`):**
+  - Continuous loop using `speech_recognition` to listen for voice commands via microphone.
+  - Recognizes spoken commands, processes them using `Speech.process_command`, and handles exceptions for unknown commands or network errors.
+  - API Class in SRM-Alexa Project
+-**Purpose:**
+The API class serves as an abstraction layer that encapsulates the functionality to interact with external services, specifically Wikipedia in this case. Its role is to facilitate the retrieval of information from Wikipedia based on user queries.
+
+Components and Usage:
+Static Method search_wikipedia(query):
+Purpose: This method is responsible for querying Wikipedia using the wikipediaapi library.
+-Implementation:
+It sets a user-agent string to identify the source of the request (SRM-Alexa).
+Utilizes wikipediaapi.Wikipedia to create a Wikipedia object for English language.
+Retrieves the Wikipedia page corresponding to the user-provided query.
+Checks if the page exists (page.exists()) and if so, returns the first 500 characters of the summary (page.summary[:500]).
+If the page does not exist or there's an issue, it returns a default message indicating no information was found.
+
+### Conclusion:
+
+SRM-Alexa showcases integration of voice control, web browsing capabilities, and Wikipedia search functionality in a user-friendly interface built with Kivy. It provides a practical example of how Python can be used to develop interactive and informative applications tailored to specific institutional needs, in this case, SRM Institute of Science and Technology. The project highlights the synergy between GUI development, web integration, and natural language processing capabilities in Python.
