@@ -69,10 +69,13 @@ class Speech:
 class SRMAlexaApp(App):
     @staticmethod
     def display_text(text):
-        popup = Popup(title='Information', content=Label(text=text), size_hint=(None, None), size=(400, 400))
-        close_button = Button(text='Close', size_hint_y=None, height=40)
+        popup_layout = BoxLayout(orientation='vertical', padding=10)
+        label = Label(text=text, size_hint=(1, 0.9))
+        close_button = Button(text='Close', size_hint=(1, 0.1))
+        popup_layout.add_widget(label)
+        popup_layout.add_widget(close_button)
+        popup = Popup(title='Information', content=popup_layout, size_hint=(None, None), size=(400, 400))
         close_button.bind(on_press=popup.dismiss)
-        popup.content.add_widget(close_button)
         popup.open()
 
     def build(self):
@@ -81,7 +84,7 @@ class SRMAlexaApp(App):
         main_layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
 
         # Adding logo
-        logo = Image(source='./Capture.png', size_hint=(1, 0.3))
+        logo = Image(source='C:/Users/Hp/Desktop/Capture.PNG', size_hint=(1, 0.3))
         main_layout.add_widget(logo)
 
         # Welcome label
