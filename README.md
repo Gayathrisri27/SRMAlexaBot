@@ -1,4 +1,4 @@
-Certainly! Here's a more detailed overview of the SRM-Alexa project:
+
 
 ### SRM-Alexa Project Overview
 
